@@ -1,0 +1,6 @@
+@Amigo_Chocolate.WebApi_HostAddress = http://localhost:5215
+
+GET {{Amigo_Chocolate.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
