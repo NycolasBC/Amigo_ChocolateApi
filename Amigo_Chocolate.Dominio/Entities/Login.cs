@@ -8,6 +8,7 @@
             Senha = senha;
         }
 
+        public int IdLogin { get; private set; }
         public string Email { get; private set; }
         public string Senha { get; private set; }
     }

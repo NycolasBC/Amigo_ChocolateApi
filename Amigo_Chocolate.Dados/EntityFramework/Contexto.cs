@@ -1,4 +1,6 @@
 ﻿using Amigo_Chocolate.Dados.EntityFramework.Configurations;
+using Amigo_Chocolate.Dados.EntityFramework.Configurations.Entities;
+using Amigo_Chocolate.Dominio.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -40,15 +42,11 @@ namespace Amigo_Chocolate.Dados.EntityFramework
 
         #region - Entities
 
-        public DbSet<Administrador> Administrador { get; set; }
-        public DbSet<Cliente> Cliente { get; set; }
-        public DbSet<Colaborador> Colaborador { get; set; }
-        public DbSet<Doador> Doador { get; set; }
-        public DbSet<Endereco> Endereco { get; set; }
-        public DbSet<Funcionario> Funcionario { get; set; }
-        public DbSet<Produto> Produto { get; set; }
-        public DbSet<ProdutoCategoria> ProdutoCategoria { get; set; }
-        public DbSet<ProdutoFamilia> ProdutoFamilia { get; set; }
+        public DbSet<Grupo> Grupo { get; set; }
+        public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
+        public DbSet<Login> Login { get; set; }
+        public DbSet<RecuperaSenha> RecuperaSenha { get; set; }
+        public DbSet<Sorteio> Sorteio { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 
         #endregion
@@ -56,21 +54,12 @@ namespace Amigo_Chocolate.Dados.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AdministradorConfiguration());
-            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
-            modelBuilder.ApplyConfiguration(new ColaboradorConfiguration());
-            modelBuilder.ApplyConfiguration(new DoadorConfiguration());
-            modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
-            modelBuilder.ApplyConfiguration(new FuncionarioConfiguration());
-            modelBuilder.ApplyConfiguration(new ProdutoCategoriaConfiguration());
-            modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
-            modelBuilder.ApplyConfiguration(new ProdutoFamiliaConfiguration());
+            modelBuilder.ApplyConfiguration(new GrupoConfiguration());
+            modelBuilder.ApplyConfiguration(new GrupoUsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new LoginConfiguration());
+            modelBuilder.ApplyConfiguration(new RecuperaSenhaConfiguration());
+            modelBuilder.ApplyConfiguration(new SorteioConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
-
-            modelBuilder.ApplyConfiguration(new DescarteConfiguration());
-            modelBuilder.ApplyConfiguration(new DoacaoConfiguration());
-            modelBuilder.ApplyConfiguration(new EstoqueConfiguration());
-            modelBuilder.ApplyConfiguration(new RegistroConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

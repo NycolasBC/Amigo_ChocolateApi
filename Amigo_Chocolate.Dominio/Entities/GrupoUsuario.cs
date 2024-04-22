@@ -4,15 +4,16 @@ namespace Amigo_Chocolate.Dominio.Entities
 {
     public class GrupoUsuario
     {
-        public GrupoUsuario(int id_Grupo, int id_Usuario, int id_Status)
+        public GrupoUsuario(int idGrupo, int idUsuario, int id_Status)
         {
-            Id_Grupo = id_Grupo;
-            Id_Usuario = id_Usuario;
+            IdGrupo = idGrupo;
+            IdUsuario = idUsuario;
             Id_Status = id_Status;
         }
 
-        public int Id_Grupo { get; private set; }
-        public int Id_Usuario { get; private set; }
+        public int IdGrupoUsuario { get; private set; }
+        public int IdGrupo { get; private set; }
+        public int IdUsuario { get; private set; }
         public int Id_Status { get; private set; }
 
         // Propriedade de navegação

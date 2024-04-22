@@ -4,9 +4,9 @@ namespace Amigo_Chocolate.Dominio.Interfaces
 {
     public interface IGrupoUsuarioRepository
     {
-        Task<GrupoUsuario> BuscarPorId(int id);
+        IEnumerable<GrupoUsuario> BuscarPorId(int id);
         Task Inserir(GrupoUsuario grupoUsuario);
         Task Atualizar(GrupoUsuario grupoUsuario);
-        Task Excluir(GrupoUsuario grupoUsuario);
+        Task Excluir(IEnumerable<GrupoUsuario> grupoUsuario);
     }
 }
