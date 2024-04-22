@@ -32,11 +32,11 @@ namespace Amigo_Chocolate.Servico.Services
             throw new NotImplementedException();
         }
 
-        public async Task<UsuarioViewModel> BuscarPorId(int id)
+        public async Task<UsuarioViewModel> BuscarPorEmail(string email)
         {
             try
             {
-                var usuario = await _usuarioRepository.BuscarPorId(id);
+                var usuario = await _usuarioRepository.BuscarPorEmail(email);
 
                 UsuarioViewModel buscaUsuarioId = _mapper.Map<UsuarioViewModel>(usuario);
 

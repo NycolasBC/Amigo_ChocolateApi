@@ -21,14 +21,14 @@ namespace Amigo_Chocolate.WebApi.Controllers
         [HttpPost("autenticar")]
         public async Task<IActionResult> Post(NovoLoginViewModel login)
         {
-            bool podeLogar = await _loginService.Autenticar(login);
+            var podeLogar = await _loginService.Autenticar(login);
 
-            if (!podeLogar)
+            if (podeLogar == null)
             {
                 return BadRequest("Login inválido");
             }
 
-            return Ok("Autenticado");
+            return Ok(podeLogar);
         }
 
         #endregion

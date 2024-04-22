@@ -24,6 +24,20 @@ namespace Amigo_Chocolate.Dados.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<Usuario> BuscarPorEmail(string email)
+        {
+            try
+            {
+                var usuario = await _contexto.Usuario.Where(c => c.Email == email).FirstOrDefaultAsync();
+
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar o usuário: {ex.Message}");
+            }
+        }
+
         public async Task<Usuario> BuscarPorId(int id)
         {
             try

@@ -25,10 +25,10 @@ namespace Amigo_Chocolate.WebApi.Controllers
         }
 
 
-        [HttpGet("buscarporid/{id}")]
-        public IActionResult GetPorId(int id)
+        [HttpGet("buscarporemail/{email}")]
+        public IActionResult GetPorEmail(string email)
         {
-            return Ok(_usuarioService.BuscarPorId(id));
+            return Ok(_usuarioService.BuscarPorEmail(email));
         }
 
         #endregion
