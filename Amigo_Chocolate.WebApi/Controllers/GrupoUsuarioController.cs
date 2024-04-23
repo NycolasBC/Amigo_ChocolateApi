@@ -19,9 +19,9 @@ namespace Amigo_Chocolate.WebApi.Controllers
         #region - GET
 
         [HttpGet("buscarporid/{id}")]
-        public IActionResult GetPorId(int id)
+        public async Task<IActionResult> GetPorId(int id)
         {
-            return Ok(_grupoUsuarioService.BuscarPorId(id));
+            return Ok(await _grupoUsuarioService.BuscarPorId(id));
         }
 
         #endregion
