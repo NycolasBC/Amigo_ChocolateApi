@@ -39,6 +39,13 @@ namespace Amigo_Chocolate.Dados.Repositories
             
         }
 
+        public async Task<int> BuscarId()
+        {
+            var ultimoId = await _contexto.Grupo.MaxAsync(c => (int?)c.IdGrupo) ?? 0;
+
+            return ultimoId;
+        }
+
         public IEnumerable<Grupo> BuscarTodos()
         {
             try

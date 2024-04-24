@@ -36,9 +36,9 @@ namespace Amigo_Chocolate.WebApi.Controllers
         #region - POST
 
         [HttpPost("adicionar")]
-        public async Task<IActionResult> Post([FromBody] NovoGrupoViewModel novoGrupo)
+        public async Task<IActionResult> Post([FromBody] NovoGrupoRequest novoGrupo)
         {
-            await _grupoService.Inserir(novoGrupo);
+            await _grupoService.Inserir(novoGrupo.NovoGrupo, novoGrupo.Id);
 
             return Ok("Grupo cadastrado com sucesso");
         }

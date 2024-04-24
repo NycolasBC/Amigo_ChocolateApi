@@ -6,7 +6,7 @@ namespace Amigo_Chocolate.Dominio.Entities
 {
     public class Grupo
     {
-        public Grupo(string? imagem, string nome, int qtdUsuario, decimal valor, DateOnly dataRevelacao, string? descricao, int id_Status)
+        public Grupo(string? imagem, string nome, int qtdUsuario, decimal valor, DateTime dataRevelacao, string? descricao, int id_Status)
         {
             Imagem = imagem;
             Nome = nome;
@@ -17,7 +17,7 @@ namespace Amigo_Chocolate.Dominio.Entities
             Id_Status = id_Status;
         }
 
-        public Grupo(int idGrupo, string? imagem, string nome, int qtdUsuario, decimal valor, DateOnly dataRevelacao, string? descricao, int id_Status)
+        public Grupo(int idGrupo, string? imagem, string nome, int qtdUsuario, decimal valor, DateTime dataRevelacao, string? descricao, int id_Status)
         {
             IdGrupo = idGrupo;
             Imagem = imagem;
@@ -34,7 +34,7 @@ namespace Amigo_Chocolate.Dominio.Entities
         public string Nome { get; private set; }
         public int QtdUsuario { get; private set; }
         public decimal Valor { get; private set; }
-        public DateOnly DataRevelacao { get; private set; }
+        public DateTime DataRevelacao { get; private set; }
         public string? Descricao { get; private set; }
         public int Id_Status { get; private set; }
     }

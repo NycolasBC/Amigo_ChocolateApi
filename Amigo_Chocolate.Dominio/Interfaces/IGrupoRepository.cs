@@ -6,6 +6,7 @@ namespace Amigo_Chocolate.Dominio.Interfaces
     {
         IEnumerable<Grupo> BuscarTodos();
         Task<Grupo> BuscarPorId(int id);
+        Task<int> BuscarId();
         Task Inserir(Grupo grupo);
         Task Atualizar(Grupo grupo);
         Task Excluir(Grupo grupo);

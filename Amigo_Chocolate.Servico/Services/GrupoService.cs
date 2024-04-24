@@ -2,9 +2,9 @@
 using Amigo_Chocolate.Dominio.Interfaces;
 using Amigo_Chocolate.Servico.Interfaces;
 using Amigo_Chocolate.Servico.ViewModels.Grupo;
-using Amigo_Chocolate.Servico.ViewModels.Login;
-using Amigo_Chocolate.Servico.ViewModels.Usuario;
+using Amigo_Chocolate.Servico.ViewModels.GrupoUsuario;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace Amigo_Chocolate.Servico.Services
 {
@@ -13,11 +13,13 @@ namespace Amigo_Chocolate.Servico.Services
         #region - Atributos e Construtores
 
         private readonly IGrupoRepository _grupoRepository;
+        private readonly IGrupoUsuarioRepository _grupoUsuarioRepository;
         private IMapper _mapper;
 
-        public GrupoService(IGrupoRepository grupoRepository, IMapper mapper)
+        public GrupoService(IGrupoRepository grupoRepository, IGrupoUsuarioRepository grupoUsuarioRepository, IMapper mapper)
         {
             _grupoRepository = grupoRepository;
+            _grupoUsuarioRepository = grupoUsuarioRepository;
             _mapper = mapper;
         }
 
@@ -64,12 +66,24 @@ namespace Amigo_Chocolate.Servico.Services
             throw new NotImplementedException();
         }
 
-        public async Task Inserir(NovoGrupoViewModel grupo)
+        public async Task Inserir(NovoGrupoViewModel grupo, int idUsuario)
         {
             try
             {
                 var novoGrupo = _mapper.Map<Grupo>(grupo);
                 await _grupoRepository.Inserir(novoGrupo);
+
+                int ultimoId = await _grupoRepository.BuscarId();
+                var grupoUsuarioViewModel = new NovoGrupoUsuarioViewModel
+                {
+                    IdGrupo = ultimoId,
+                    IdUsuario = idUsuario,
+                    Id_Status = 1
+                };
+
+                var grupoUsuario = _mapper.Map<GrupoUsuario>(grupoUsuarioViewModel);
+
+                await _grupoUsuarioRepository.Inserir(grupoUsuario);
             }
             catch (Exception ex)
             {

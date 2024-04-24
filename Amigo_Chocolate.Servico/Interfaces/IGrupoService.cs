@@ -6,7 +6,7 @@ namespace Amigo_Chocolate.Servico.Interfaces
     {
         IEnumerable<GrupoViewModel> BuscarTodos();
         Task<GrupoViewModel> BuscarPorId(int id);
-        Task Inserir(NovoGrupoViewModel grupo);
+        Task Inserir(NovoGrupoViewModel grupo, int idUsuario);
         Task Atualizar(GrupoViewModel grupo);
         Task Excluir(int id);
     }
