@@ -24,27 +24,6 @@ namespace Amigo_Chocolate.Servico.Services
         #endregion
 
 
-        public Task Atualizar(LoginViewModel login)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<LoginViewModel> BuscarPorId(int id)
-        {
-            try
-            {
-                var login = await _loginRepository.BuscarPorId(id);
-
-                LoginViewModel buscaLoginId = _mapper.Map<LoginViewModel>(login);
-
-                return buscaLoginId;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao buscar login (service): {ex.Message}");
-            }
-        }
-
         public async Task<UsuarioViewModel?> Autenticar(NovoLoginViewModel login)
         {
             var usuarioAutenticado = await _loginRepository
@@ -53,9 +32,9 @@ namespace Amigo_Chocolate.Servico.Services
             if (usuarioAutenticado != null)
             {
                 var usuario = await _usuarioRepository.BuscarPorEmail(login.Email);
-                UsuarioViewModel buscaUsuarioEmail = _mapper.Map<UsuarioViewModel>(usuario);
+                UsuarioViewModel buscaUsuarioPoEmail = _mapper.Map<UsuarioViewModel>(usuario);
 
-                return buscaUsuarioEmail;
+                return buscaUsuarioPoEmail;
             }
             else
             {

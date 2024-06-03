@@ -1,5 +1,6 @@
 ﻿using Amigo_Chocolate.Servico.Interfaces;
 using Amigo_Chocolate.Servico.ViewModels.Login;
+using Amigo_Chocolate.Servico.ViewModels.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amigo_Chocolate.WebApi.Controllers
@@ -18,17 +19,19 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - POST
 
-        [HttpPost("autenticar")]
+        [HttpPost()]
+        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(NovoLoginViewModel login)
         {
-            var podeLogar = await _loginService.Autenticar(login);
+            var usuario = await _loginService.Autenticar(login);
 
-            if (podeLogar == null)
+            if (usuario == null)
             {
-                return BadRequest("Login inválido");
+                return BadRequest("Login inválido ou usuário inexistente!");
             }
 
-            return Ok(podeLogar);
+            return Ok(usuario);
         }
 
         #endregion

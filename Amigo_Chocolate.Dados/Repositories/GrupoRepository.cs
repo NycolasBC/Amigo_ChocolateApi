@@ -19,9 +19,17 @@ namespace Amigo_Chocolate.Dados.Repositories
         #endregion
 
 
-        public Task Atualizar(Grupo grupo)
+        public async Task Atualizar(Grupo grupo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _contexto.Grupo.Where(g => g.IdGrupo == grupo.IdGrupo).ExecuteUpdateAsync(g => g.SetProperty(g => g, grupo));
+                await _contexto.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar grupo: {ex.Message}");
+            }
         }
 
         public async Task<Grupo> BuscarPorId(int id)
@@ -36,7 +44,7 @@ namespace Amigo_Chocolate.Dados.Repositories
             {
                 throw new Exception($"Erro ao buscar o grupo: {ex.Message}");
             }
-            
+
         }
 
         public async Task<int> BuscarId()

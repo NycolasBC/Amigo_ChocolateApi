@@ -21,7 +21,15 @@ namespace Amigo_Chocolate.Dados.Repositories
 
         public async Task Atualizar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _contexto.Usuario.Where(u => u.IdUsuario == usuario.IdUsuario).ExecuteUpdateAsync(u => u.SetProperty(u => u, usuario));
+                await _contexto.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar usuário: {ex.Message}");
+            }
         }
 
         public async Task<Usuario> BuscarPorEmail(string email)

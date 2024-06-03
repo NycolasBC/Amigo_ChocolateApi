@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amigo_Chocolate.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
@@ -18,14 +18,16 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - GET
 
-        [HttpGet("buscartodos")]
+        [HttpGet()]
+        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             return Ok(_usuarioService.BuscarTodos());
         }
 
 
-        [HttpGet("buscarporemail/{email}")]
+        [HttpGet("/{email}")]
+        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
         public IActionResult GetPorEmail(string email)
         {
             return Ok(_usuarioService.BuscarPorEmail(email));
@@ -35,24 +37,26 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - POST
 
-        [HttpPost("adicionar")]
+        [HttpPost()]
+        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] NovoUsuarioViewModel novoUsuario)
         {
             await _usuarioService.Inserir(novoUsuario);
 
-            return Ok("Usuário cadastrado com sucesso");
+            return Created();
         }
 
         #endregion
 
         #region - DELETE
 
-        [HttpDelete("excluir/{id}")]
+        [HttpDelete("/{id}")]
+        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> Excluir(int id)
         {
             await _usuarioService.Excluir(id);
 
-            return Ok("Usuário excluído com sucesso");
+            return Ok();
         }
 
         #endregion

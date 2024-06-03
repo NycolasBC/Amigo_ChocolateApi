@@ -1,10 +1,11 @@
 ﻿using Amigo_Chocolate.Servico.Interfaces;
 using Amigo_Chocolate.Servico.ViewModels.Grupo;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amigo_Chocolate.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class GrupoController : ControllerBase
     {
@@ -18,14 +19,16 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - GET
 
-        [HttpGet("buscartodos")]
+        [HttpGet()]
+        [ProducesResponseType(typeof(GrupoViewModel), StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             return Ok(_grupoService.BuscarTodos());
         }
 
 
-        [HttpGet("buscarporid/{id}")]
+        [HttpGet("/{id}")]
+        [ProducesResponseType(typeof(GrupoViewModel), StatusCodes.Status200OK)]
         public IActionResult GetPorId(int id)
         {
             return Ok(_grupoService.BuscarPorId(id));
@@ -35,24 +38,26 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - POST
 
-        [HttpPost("adicionar")]
+        [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] NovoGrupoRequest novoGrupo)
         {
             await _grupoService.Inserir(novoGrupo.NovoGrupo, novoGrupo.Id);
 
-            return Ok("Grupo cadastrado com sucesso");
+            return Created();
         }
 
         #endregion
 
         #region - DELETE
 
-        [HttpDelete("excluir/{id}")]
+        [HttpDelete("/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Excluir(int id)
         {
             await _grupoService.Excluir(id);
 
-            return Ok("Grupo excluído com sucesso");
+            return Ok();
         }
 
         #endregion

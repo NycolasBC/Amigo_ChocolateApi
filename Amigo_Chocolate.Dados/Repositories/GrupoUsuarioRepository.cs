@@ -2,6 +2,7 @@
 using Amigo_Chocolate.Dominio.Entities;
 using Amigo_Chocolate.Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace Amigo_Chocolate.Dados.Repositories
 {
@@ -21,7 +22,15 @@ namespace Amigo_Chocolate.Dados.Repositories
 
         public async Task Atualizar(GrupoUsuario grupoUsuario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _contexto.GrupoUsuario.Where(g => g.IdGrupo == grupoUsuario.IdGrupo).ExecuteUpdateAsync(g => g.SetProperty(g => g.Id_Status, 9));
+                await _contexto.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar grupo: {ex.Message}");
+            }
         }
 
         public IEnumerable<GrupoUsuario> BuscarPorId(int id)
@@ -38,11 +47,11 @@ namespace Amigo_Chocolate.Dados.Repositories
             }
         }
 
-        public async Task Excluir(IEnumerable<GrupoUsuario> grupoUsuario)
+        public async Task Excluir(GrupoUsuario grupoUsuario)
         {
             try
             {
-                _contexto.GrupoUsuario.RemoveRange(grupoUsuario);
+                _contexto.GrupoUsuario.Remove(grupoUsuario);
                 await _contexto.SaveChangesAsync();
             }
             catch (Exception ex)
