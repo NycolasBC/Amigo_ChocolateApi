@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amigo_Chocolate.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {

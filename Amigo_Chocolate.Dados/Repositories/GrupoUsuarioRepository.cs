@@ -47,11 +47,11 @@ namespace Amigo_Chocolate.Dados.Repositories
             }
         }
 
-        public async Task Excluir(GrupoUsuario grupoUsuario)
+        public async Task Excluir(IEnumerable<GrupoUsuario> grupoUsuario)
         {
             try
             {
-                _contexto.GrupoUsuario.Remove(grupoUsuario);
+                _contexto.GrupoUsuario.RemoveRange(grupoUsuario);
                 await _contexto.SaveChangesAsync();
             }
             catch (Exception ex)

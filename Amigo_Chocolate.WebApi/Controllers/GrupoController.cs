@@ -27,7 +27,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
         }
 
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(GrupoViewModel), StatusCodes.Status200OK)]
         public IActionResult GetPorId(int id)
         {
@@ -51,7 +51,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - DELETE
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Excluir(int id)
         {

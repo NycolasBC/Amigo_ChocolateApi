@@ -26,7 +26,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
         }
 
 
-        [HttpGet("/{email}")]
+        [HttpGet("{email}")]
         [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
         public IActionResult GetPorEmail(string email)
         {
@@ -50,7 +50,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - DELETE
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> Excluir(int id)
         {

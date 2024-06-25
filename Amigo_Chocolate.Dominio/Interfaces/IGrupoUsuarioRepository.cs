@@ -7,6 +7,6 @@ namespace Amigo_Chocolate.Dominio.Interfaces
         IEnumerable<GrupoUsuario> BuscarPorId(int id);
         Task Inserir(GrupoUsuario grupoUsuario);
         Task Atualizar(GrupoUsuario grupoUsuario);
-        Task Excluir(GrupoUsuario grupoUsuario);
+        Task Excluir(IEnumerable<GrupoUsuario> grupoUsuario);
     }
 }

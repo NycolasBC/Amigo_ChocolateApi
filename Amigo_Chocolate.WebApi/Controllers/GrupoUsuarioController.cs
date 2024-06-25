@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amigo_Chocolate.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class GrupoUsuarioController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - GET
 
-        [HttpGet("buscarporid/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetPorId(int id)
         {
             return Ok(await _grupoUsuarioService.BuscarPorId(id));
@@ -28,7 +28,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - POST
 
-        [HttpPost("adicionar")]
+        [HttpPost()]
         public async Task<IActionResult> Post([FromBody] NovoGrupoUsuarioViewModel novoGrupoUsuario)
         {
             await _grupoUsuarioService.Inserir(novoGrupoUsuario);
@@ -40,7 +40,7 @@ namespace Amigo_Chocolate.WebApi.Controllers
 
         #region - DELETE
 
-        [HttpDelete("excluir/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Excluir(int id)
         {
             await _grupoUsuarioService.Excluir(id);
