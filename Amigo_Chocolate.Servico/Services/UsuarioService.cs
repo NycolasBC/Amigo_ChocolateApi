@@ -1,6 +1,7 @@
 ﻿using Amigo_Chocolate.Dominio.Entities;
 using Amigo_Chocolate.Dominio.Interfaces;
 using Amigo_Chocolate.Servico.Interfaces;
+using Amigo_Chocolate.Servico.ViewModels.Convite;
 using Amigo_Chocolate.Servico.ViewModels.Login;
 using Amigo_Chocolate.Servico.ViewModels.Usuario;
 using AutoMapper;
@@ -32,19 +33,24 @@ namespace Amigo_Chocolate.Servico.Services
             throw new NotImplementedException();
         }
 
-        public async Task<UsuarioViewModel> BuscarPorEmail(string email)
+        public async Task AtualizarConvite(AtualizaConviteViewModel convite)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ConviteViewModel>> BuscarPorEmail(string email)
         {
             try
             {
-                var usuario = await _usuarioRepository.BuscarPorEmail(email);
+                var convites = await _usuarioRepository.BuscarPorEmail(email);
 
-                UsuarioViewModel buscaUsuarioId = _mapper.Map<UsuarioViewModel>(usuario);
+                IEnumerable<ConviteViewModel> listaConvites = _mapper.Map<IEnumerable<ConviteViewModel>>(convites);
 
-                return buscaUsuarioId;
+                return listaConvites;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao buscar usuário (service): {ex.Message}");
+                throw new Exception($"Erro ao buscar convites do usuário (service): {ex.Message}");
             }           
         }
 
@@ -109,6 +115,20 @@ namespace Amigo_Chocolate.Servico.Services
             {
                 throw new Exception($"Erro ao inserir usuário (service): {ex.Message}");
             }         
+        }
+
+        public async Task InserirConvite(NovoConviteViewModel convite)
+        {
+            try
+            {
+                var novoConvite = _mapper.Map<Convite>(convite);
+
+                await _usuarioRepository.InserirConvite(novoConvite);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao enviar convite (service): {ex.Message}");
+            }
         }
     }
 }

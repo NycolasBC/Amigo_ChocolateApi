@@ -5,10 +5,12 @@ namespace Amigo_Chocolate.Dominio.Interfaces
     public interface IUsuarioRepository
     {
         IEnumerable<Usuario> BuscarTodos();
-        Task<Usuario> BuscarPorEmail(string email);
+        Task<IEnumerable<Convite>> BuscarPorEmail(string email);
         Task<Usuario> BuscarPorId(int id);
         Task Inserir(Usuario usuario);
+        Task InserirConvite(Convite convite);
         Task Atualizar(Usuario usuario);
+        Task AtualizarConvite(Convite convite);
         Task Excluir(Usuario usuario);
     }
 }

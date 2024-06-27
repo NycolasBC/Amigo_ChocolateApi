@@ -24,6 +24,12 @@ namespace Amigo_Chocolate.WebApi.Controllers
             return Ok(await _grupoUsuarioService.BuscarPorId(id));
         }
 
+        [HttpGet("usuario/{id}")]
+        public async Task<IActionResult> GetUsuariosGrupo(int id)
+        {
+            return Ok(await _grupoUsuarioService.BuscarUsuariosGrupo(id));
+        }
+
         #endregion
 
         #region - POST

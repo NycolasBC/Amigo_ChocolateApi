@@ -15,12 +15,14 @@ namespace Amigo_Chocolate.Servico.Services
 
         private readonly IGrupoUsuarioRepository _grupoUsuarioRepository;
         private readonly IGrupoRepository _grupoRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private IMapper _mapper;
 
-        public GrupoUsuarioService(IGrupoUsuarioRepository grupoUsuarioRepository, IGrupoRepository grupoRepository, IMapper mapper)
+        public GrupoUsuarioService(IGrupoUsuarioRepository grupoUsuarioRepository, IGrupoRepository grupoRepository, IUsuarioRepository usuarioRepository, IMapper mapper)
         {
             _grupoUsuarioRepository = grupoUsuarioRepository;
             _grupoRepository = grupoRepository;
+            _usuarioRepository = usuarioRepository;
             _mapper = mapper;
         }
 
@@ -57,6 +59,34 @@ namespace Amigo_Chocolate.Servico.Services
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao buscar todos os grupos do usuário (service): {ex.Message}");
+            }
+        }
+
+        public async Task<List<UsuarioViewModel>> BuscarUsuariosGrupo(int id)
+        {
+            try
+            {
+                var usuarios = _grupoUsuarioRepository.BuscarUsuariosPorId(id);
+
+                if (usuarios != null)
+                {
+                    List<UsuarioViewModel> usuariosNoGrupo = new List<UsuarioViewModel>();
+
+                    foreach (GrupoUsuario itens in usuarios)
+                    {
+                        usuariosNoGrupo.Add(_mapper.Map<UsuarioViewModel>(await _usuarioRepository.BuscarPorId(itens.IdUsuario)));
+                    }
+
+                    return usuariosNoGrupo;
+                }
+                else
+                {
+                    throw new Exception("Não foi encontrado usuário no grupo");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar todos os usuários do grupo (service): {ex.Message}");
             }
         }
 

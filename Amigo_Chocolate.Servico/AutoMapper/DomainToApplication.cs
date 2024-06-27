@@ -1,4 +1,5 @@
 ﻿using Amigo_Chocolate.Dominio.Entities;
+using Amigo_Chocolate.Servico.ViewModels.Convite;
 using Amigo_Chocolate.Servico.ViewModels.Grupo;
 using Amigo_Chocolate.Servico.ViewModels.GrupoUsuario;
 using Amigo_Chocolate.Servico.ViewModels.Login;
@@ -13,6 +14,7 @@ namespace Amigo_Chocolate.Servico.AutoMapper
     {
         public DomainToApplication()
         {
+            CreateMap<Convite, ConviteViewModel>();
             CreateMap<Grupo, GrupoViewModel>();
             CreateMap<GrupoUsuario, GrupoUsuarioViewModel>();
             CreateMap<Login, LoginViewModel>();

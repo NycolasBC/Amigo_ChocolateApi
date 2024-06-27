@@ -1,4 +1,5 @@
 ﻿using Amigo_Chocolate.Dominio.Entities;
+using Amigo_Chocolate.Servico.ViewModels.Convite;
 using Amigo_Chocolate.Servico.ViewModels.Grupo;
 using Amigo_Chocolate.Servico.ViewModels.GrupoUsuario;
 using Amigo_Chocolate.Servico.ViewModels.Login;
@@ -13,6 +14,38 @@ namespace Amigo_Chocolate.Servico.AutoMapper
     {
         public ApplicationToDomain()
         {
+            #region - Convite
+
+            CreateMap<ConviteViewModel, Convite>()
+               .ConstructUsing(p => new Convite(
+                   p.IdConvite,
+                   p.IdGrupo,
+                   p.NomeGrupo,
+                   p.NomeUsuario,
+                   p.EmailConvidado,
+                   p.Descricao,
+                   p.Id_Status
+                ));
+
+            CreateMap<NovoConviteViewModel, Convite>()
+               .ConstructUsing(p => new Convite(
+                   p.IdGrupo,
+                   p.NomeGrupo,
+                   p.NomeUsuario,
+                   p.EmailConvidado,
+                   p.Descricao,
+                   p.Id_Status
+                ));
+
+            CreateMap<AtualizaConviteViewModel, Convite>()
+               .ConstructUsing(p => new Convite(
+                   p.IdConvite,
+                   p.Descricao,
+                   p.Id_Status
+                ));
+
+            #endregion
+
             #region - Grupo
 
             CreateMap<GrupoViewModel, Grupo>()

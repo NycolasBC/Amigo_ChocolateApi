@@ -7,6 +7,7 @@ namespace Amigo_Chocolate.Servico.Interfaces
     public interface IGrupoUsuarioService
     {
         Task<List<GrupoViewModel>> BuscarPorId(int id);
+        Task<List<UsuarioViewModel>> BuscarUsuariosGrupo(int id);
         Task Inserir(NovoGrupoUsuarioViewModel grupoUsuario);
         Task Atualizar(GrupoUsuarioViewModel grupoUsuario);
         Task Excluir(int id);

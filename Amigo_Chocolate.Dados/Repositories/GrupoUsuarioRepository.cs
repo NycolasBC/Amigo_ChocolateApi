@@ -47,6 +47,20 @@ namespace Amigo_Chocolate.Dados.Repositories
             }
         }
 
+        public IEnumerable<GrupoUsuario> BuscarUsuariosPorId(int id)
+        {
+            try
+            {
+                var usuarios = _contexto.GrupoUsuario.Where(c => c.IdGrupo == id).ToList();
+
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar usuários do grupo: {ex.Message}");
+            }
+        }
+
         public async Task Excluir(IEnumerable<GrupoUsuario> grupoUsuario)
         {
             try

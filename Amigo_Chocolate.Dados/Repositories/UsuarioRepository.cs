@@ -32,17 +32,30 @@ namespace Amigo_Chocolate.Dados.Repositories
             }
         }
 
-        public async Task<Usuario> BuscarPorEmail(string email)
+        public async Task AtualizarConvite(Convite convite)
         {
             try
             {
-                var usuario = await _contexto.Usuario.Where(c => c.Email == email).FirstOrDefaultAsync();
-
-                return usuario;
+                await _contexto.Convite.Where(u => u.IdConvite == convite.IdConvite).ExecuteUpdateAsync(u => u.SetProperty(u => u, convite));
+                await _contexto.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao buscar o usuário: {ex.Message}");
+                throw new Exception($"Erro ao atualizar o convite: {ex.Message}");
+            }
+        }
+
+        public async Task<IEnumerable<Convite>> BuscarPorEmail(string email)
+        {
+            try
+            {
+                var convites = await _contexto.Convite.Where(c => c.EmailConvidado == email).ToListAsync();
+
+                return convites;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar convites do usuário: {ex.Message}");
             }
         }
 
@@ -97,6 +110,19 @@ namespace Amigo_Chocolate.Dados.Repositories
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao inserir usuário: {ex.Message}");
+            }
+        }
+
+        public async Task InserirConvite(Convite convite)
+        {
+            try
+            {
+                await _contexto.Convite.AddAsync(convite);
+                await _contexto.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao enviar o convite: {ex.Message}");
             }
         }
     }

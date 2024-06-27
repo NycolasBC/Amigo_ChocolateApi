@@ -1,4 +1,5 @@
 ﻿using Amigo_Chocolate.Servico.Interfaces;
+using Amigo_Chocolate.Servico.ViewModels.Convite;
 using Amigo_Chocolate.Servico.ViewModels.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,8 +27,8 @@ namespace Amigo_Chocolate.WebApi.Controllers
         }
 
 
-        [HttpGet("{email}")]
-        [ProducesResponseType(typeof(UsuarioViewModel), StatusCodes.Status200OK)]
+        [HttpGet("convite/{email}")]
+        [ProducesResponseType(typeof(ConviteViewModel), StatusCodes.Status200OK)]
         public IActionResult GetPorEmail(string email)
         {
             return Ok(_usuarioService.BuscarPorEmail(email));
@@ -42,6 +43,15 @@ namespace Amigo_Chocolate.WebApi.Controllers
         public async Task<IActionResult> Post([FromBody] NovoUsuarioViewModel novoUsuario)
         {
             await _usuarioService.Inserir(novoUsuario);
+
+            return Created();
+        }
+
+        [HttpPost("convite")]
+        [ProducesResponseType(typeof(NovoConviteViewModel), StatusCodes.Status201Created)]
+        public async Task<IActionResult> PostConvite([FromBody] NovoConviteViewModel novoConvite)
+        {
+            await _usuarioService.InserirConvite(novoConvite);
 
             return Created();
         }
